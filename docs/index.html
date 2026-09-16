@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campioni 2027 Costing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#F5F7F9; --sheet:#FFFFFF; --ink:#14213D; --ink-2:#4A5670; --rule:#D9DFE7;
+  --cyan:#0093B8; --mag:#C8337A; --yel:#E2B300; --key:#14213D; --soft:#E6F3F7;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif; --body:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0E1524; --sheet:#152036; --ink:#E8EDF5; --ink-2:#A3AFC4; --rule:#2A3852; --cyan:#3EC3E3; --mag:#E86AA6; --yel:#F0C93A; --key:#E8EDF5; --soft:#16324A;}}
+:root[data-theme="dark"]{--paper:#0E1524; --sheet:#152036; --ink:#E8EDF5; --ink-2:#A3AFC4; --rule:#2A3852; --cyan:#3EC3E3; --mag:#E86AA6; --yel:#F0C93A; --key:#E8EDF5; --soft:#16324A;}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--body);padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:1040px;margin:0 auto}
+.colorbar{display:flex;gap:0;height:10px;margin:24px 0 0}
+.colorbar i{flex:1}
+.colorbar i:nth-child(1){background:var(--cyan)}.colorbar i:nth-child(2){background:var(--mag)}.colorbar i:nth-child(3){background:var(--yel)}.colorbar i:nth-child(4){background:var(--key)}
+.colorbar i:nth-child(5){background:color-mix(in srgb,var(--cyan) 50%,transparent)}.colorbar i:nth-child(6){background:color-mix(in srgb,var(--mag) 50%,transparent)}.colorbar i:nth-child(7){background:color-mix(in srgb,var(--yel) 50%,transparent)}.colorbar i:nth-child(8){background:color-mix(in srgb,var(--key) 50%,transparent)}
+.slug{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font:12px var(--mono);color:var(--ink-2);padding:8px 0;border-bottom:1px solid var(--rule)}
+header{padding-block:48px 32px}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+h1{font-family:var(--display);font-stretch:68%;font-weight:800;font-size:clamp(44px,8vw,92px);line-height:.95;margin:12px 0 20px;text-wrap:balance;letter-spacing:-.01em}
+h2{font-family:var(--display);font-stretch:75%;font-weight:700;font-size:clamp(28px,4vw,40px);line-height:1.05;margin:0 0 12px;text-wrap:balance}
+h3{font-size:16px;margin:0 0 6px}
+.lede{max-width:62ch;font-size:18px;color:var(--ink-2)}
+.who{margin-top:20px;font-size:14px;color:var(--ink-2)}
+.who b{color:var(--ink)}
+section{padding-block:40px;border-top:1px solid var(--rule)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border-top:3px solid var(--ink);margin-top:8px}
+.fig{padding:16px 16px 16px 0;border-bottom:1px solid var(--rule)}
+.fig b{display:block;font:500 32px/1.1 var(--mono);font-variant-numeric:tabular-nums}
+.fig span{font-size:13px;color:var(--ink-2)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+p{max-width:66ch}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+th{text-align:left;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);border-bottom:2px solid var(--ink);padding:8px}
+td{padding:8px;border-bottom:1px solid var(--rule);vertical-align:top}
+.tool{background:var(--sheet);border:1px solid var(--rule);padding:24px;display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+label{display:block;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin:0 0 6px}
+.field{margin-bottom:18px}
+select,input[type=number]{width:100%;font:16px var(--mono);padding:10px;border:1px solid var(--rule);background:var(--paper);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--cyan)}
+:focus-visible{outline:2px solid var(--mag);outline-offset:2px}
+.out{display:grid;gap:10px;align-content:start}
+.out div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--rule);padding-bottom:8px}
+.out div.big{border-bottom:3px solid var(--cyan)}
+.out div.big .num{font-size:28px;font-weight:500}
+.split{height:14px;display:flex;margin-top:6px;background:var(--soft)}
+.split i{display:block;height:100%}
+.legend{font-size:12px;color:var(--ink-2);display:flex;gap:16px;flex-wrap:wrap;margin-top:6px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;margin-right:6px;background:var(--c)}
+.maps{display:grid;gap:0;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));border-top:1px solid var(--rule)}
+.maps div{padding:14px 16px 14px 0;border-bottom:1px solid var(--rule)}
+.maps small{display:block;font:12px var(--mono);color:var(--cyan)}
+.note{font-size:13px;color:var(--ink-2)}
+.dl{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+.dl a{color:var(--ink);text-decoration:none;font:500 13px var(--mono);border:1px solid var(--ink);padding:8px 12px}
+footer{font-size:12px;color:var(--ink-2);padding-top:24px;border-top:1px solid var(--rule)}
+footer li{margin-bottom:4px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="colorbar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="slug"><span>CAMPIONI-2027 · FOGLIO 70×100 · 4/4 CMYK</span><span>Caso di studio · settembre 2026</span></div>
+
+  <header>
+    <div class="eyebrow">Portfolio · Cost and Technical Analysis</div>
+    <h1>Quanto costa una bustina di figurine?</h1>
+    <p class="lede">Ho scomposto una collezione fittizia (album da 48 pagine, bustine da 6 figurine autoadesive, espositore da banco) fino al foglio macchina, e l'ho ricostruita in un modello costi con prezzi di mercato 2025-2026.</p>
+    <p class="who"><b>Matteo</b> · candidatura per Cost and Technical Analysis Specialist, Modena · background in produzione come montatore</p>
+  </header>
+
+  <section>
+    <h2>I numeri chiave</h2>
+    <div class="figs">
+      <div class="fig"><b>€ 0,041</b><span>costo pieno di una bustina su 1 milione di pezzi</span></div>
+      <div class="fig"><b>€ 0,65</b><span>costo pieno di un album su 100.000 copie</span></div>
+      <div class="fig"><b>63%</b><span>quota di carta e cartoncino nel costo variabile dell'album</span></div>
+      <div class="fig"><b>12.741</b><span>bustine: oltre questa soglia conviene stampare le figurine internamente</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Preventivatore</h2>
+    <p class="note">Stessa logica del modello Excel: costo pieno = (costo variabile + costi di avviamento ÷ tiratura) × (1 + 15% overhead). Esempio precaricato.</p>
+    <div class="tool">
+      <div>
+        <div class="field"><label for="prod">Prodotto</label>
+          <select id="prod"><option value="b">Bustina (6 figurine)</option><option value="a">Album 48 pagine</option></select></div>
+        <div class="field"><label for="qty">Tiratura (pezzi)</label><input id="qty" type="number" min="1000" step="1000" value="250000"></div>
+        <div class="field"><label for="paper">Variazione prezzo carta: <span id="paperv" class="num">0%</span></label><input id="paper" type="range" min="-20" max="30" step="5" value="0"></div>
+        <div class="field"><label for="mk">Ricarico commerciale: <span id="mkv" class="num">25%</span></label><input id="mk" type="range" min="0" max="50" step="5" value="25"></div>
+      </div>
+      <div class="out" aria-live="polite">
+        <div><span>Costo variabile unitario</span><span class="num" id="o1"></span></div>
+        <div><span>Quota avviamento unitaria</span><span class="num" id="o2"></span></div>
+        <div><span>Costo pieno unitario</span><span class="num" id="o3"></span></div>
+        <div class="big"><span>Prezzo di offerta</span><span class="num" id="o4"></span></div>
+        <div><span>Valore del preventivo</span><span class="num" id="o5"></span></div>
+        <div style="display:block;border:0">
+          <span class="note">Composizione del costo pieno</span>
+          <div class="split" id="split"></div>
+          <div class="legend"><span style="--c:var(--cyan)">carta</span><span style="--c:var(--mag)">altri variabili</span><span style="--c:var(--yel)">avviamento</span><span style="--c:var(--ink-2)">overhead</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Dalla collezione al foglio macchina</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Componente</th><th>Materiale</th><th>Stampa</th><th>Cartotecnica</th><th>Imposizione</th></tr></thead>
+      <tbody>
+        <tr><td>Interni album</td><td>Patinata opaca 115 g/m²</td><td>Offset 4+4</td><td>Piega, punto metallico, rifilo</td><td class="num">16 pp / foglio</td></tr>
+        <tr><td>Copertina</td><td>Cartoncino GC1 300 g/m²</td><td>Offset 4+0</td><td>Plastificazione, cordonatura</td><td class="num">4 / foglio</td></tr>
+        <tr><td>Figurina 5×7 cm</td><td>Autoadesiva + liner</td><td>Offset 4+0, retro 1 col.</td><td>Fustella a mezzo taglio</td><td class="num">180 / foglio</td></tr>
+        <tr><td>Bustina</td><td>BOPP 30 µm</td><td>Flessografia 4 col.</td><td>Flow-pack</td><td class="num">0,0126 m²</td></tr>
+        <tr><td>Espositore</td><td>Microonda E</td><td>Offset accoppiato</td><td>Fustella, incollaggio</td><td class="num">50 bustine</td></tr>
+      </tbody></table></div>
+  </section>
+
+  <section>
+    <h2>Cosa copre il progetto</h2>
+    <div class="maps">
+      <div><small>Analisi tecnica</small>Distinta con materiali, tecniche di stampa e lavorazioni</div>
+      <div><small>Schede costi</small>Costo variabile, avviamento e costo pieno per prodotto</div>
+      <div><small>Preventivi</small>Curva delle economie di scala e sensitività carta × tiratura</div>
+      <div><small>Listini fornitori</small>Prezzi a scaglioni e punteggio pesato su 4 criteri</div>
+      <div><small>Interno / esterno</small>Make or buy con tiratura di pareggio</div>
+      <div><small>Nuovi prodotti</small>Figurina olografica (+€ 0,0005) e bustina in carta (+4,9%)</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Perché dalla produzione</h2>
+    <p>Da montatore ho imparato che un costo nasce in reparto: nei tempi ciclo, negli scarti, negli avviamenti e nei colli di bottiglia. In questo lavoro ho portato quel modo di ragionare su carta, stampa e cartotecnica, con Excel come strumento. Tutte le ipotesi sono dichiarate e modificabili, perché un buon preventivo si migliora confrontandolo con i dati reali di reparto e dei fornitori.</p>
+    <div class="dl"><a href="../output/modello_costi.xlsx">Modello Excel · 8 fogli</a><a href="../output/report_caso_studio.pdf">Report PDF · 7 pagine</a></div>
+    <p class="note">Collezione e fornitori sono fittizi. Materie prime da fonti di mercato; lavorazioni e costi orari sono stime.</p>
+  </section>
+
+  <footer>
+    <b>Fonti di mercato</b>
+    <ul>
+      <li>Pricepedia, Graphic Paper Prices (luglio 2025): carta patinata in fogli, 1.031 €/t</li>
+      <li>FreshPlaza (aprile 2026) e Pulpapernews (maggio 2026): rincari carta 2026</li>
+      <li>ChemAnalyst, BOPP Film Prices Q2 2026: 2.653 USD/t (Germania)</li>
+      <li>Energia B2B su dati ARERA: 26,5 c€/kWh per le imprese</li>
+      <li>Lexplain, CCNL Grafici Editoriali 2024-2026: livello B2, 1.713,68 €/mese</li>
+      <li>Muscara.com: bustina da 6 figurine a 1,00 €</li>
+    </ul>
+  </footer>
+</div>
+
+<script>
+const D={b:{v:0.0349433,paper:0.013475,f:489.6},a:{v:0.5600325,paper:0.3520859,f:681.6}};
+const $=id=>document.getElementById(id);
+const eur=(x,d)=>"€ "+x.toLocaleString("it-IT",{minimumFractionDigits:d,maximumFractionDigits:d});
+function run(){
+  const p=D[$("prod").value], n=Math.max(1000,+$("qty").value||1000), dp=+$("paper").value/100, mk=+$("mk").value/100;
+  $("paperv").textContent=(dp>0?"+":"")+Math.round(dp*100)+"%"; $("mkv").textContent=Math.round(mk*100)+"%";
+  const paper=p.paper*(1+dp), other=p.v-p.paper, setup=p.f/n, ind=paper+other+setup, full=ind*1.15, price=full*(1+mk);
+  const d=$("prod").value==="b"?4:3;
+  $("o1").textContent=eur(paper+other,d); $("o2").textContent=eur(setup,d); $("o3").textContent=eur(full,d);
+  $("o4").textContent=eur(price,d); $("o5").textContent=eur(price*n,0);
+  const parts=[[paper,"var(--cyan)"],[other,"var(--mag)"],[setup,"var(--yel)"],[full-ind,"var(--ink-2)"]];
+  $("split").innerHTML=parts.map(([v,c])=>`<i style="width:${(v/full*100).toFixed(1)}%;background:${c}"></i>`).join("");
+}
+["prod","qty","paper","mk"].forEach(id=>$(id).addEventListener("input",run));
+run();
+</script>
+
+</body>
+</html>
